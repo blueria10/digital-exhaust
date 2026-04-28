@@ -1,0 +1,319 @@
+:root {
+    --neon-red: #FF0033;
+    --pure-white: #FFFFFF;
+    --system-gray: #E6E6E6;
+    --black: #000000;
+}
+
+/* For GLOBAL RESET */
+html, body {
+    height: 100%;
+    margin: 0;
+    overflow: hidden; 
+    background-color: var(--pure-white);
+}
+
+body {
+    font-family: 'Inter', sans-serif;
+    color: var(--black);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-transform: uppercase;
+}
+
+
+
+/* CPU Glow & Entrance */
+.cpu-image {
+    height: 30vh;
+    cursor: pointer;
+    transition: transform 0.5s cubic-bezier(0.19, 1, 0.22, 1);
+    animation: glow 5s ease-in-out infinite;
+}
+
+.cpu-image:hover { transform: scale(1.2);}
+
+@keyframes glow {
+    0%, 100% { filter: drop-shadow(0 0 5px rgba(123, 235, 255, 0.3)); }
+    50% { filter: drop-shadow(0 0 100px rgba(123, 235, 255, 0.8)); }
+}
+
+
+/* Container for instructions */
+.instruction-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 100px;
+    z-index: 10;
+    transition: transform 0.8s cubic-bezier(0.19, 1, 0.22, 1);
+}
+
+.command-text {
+    font-size: 2.5rem;
+    font-weight: 100;
+    max-width: 800px;
+    text-align: center;
+}
+
+/* Brutalist System Buttons */
+.system-btn {
+    background: none;
+    border: 4px solid;
+    padding: 20px 60px;
+    font-family: inherit;
+    font-size: 1.5rem;
+    font-weight: 900;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    margin: 0 40px;
+    text-transform: uppercase;
+}
+
+.btn-blue { color: #007BFF; border-color: #007BFF; }
+.btn-blue:hover { background-color: #007BFF; color: white; box-shadow: 0 0 30px rgba(0, 123, 255, 0.5); }
+
+.btn-red { color: #FF0033; border-color: #FF0033; }
+.btn-red:hover { background-color: #FF0033; color: white; box-shadow: 0 0 30px rgba(255, 0, 51, 0.5); }
+
+/* Slider Track Styles (Instruction 2) */
+.slider-track {
+    width: 500px;
+    height: 4px;
+    background: var(--system-gray);
+    position: relative;
+    margin-top: 20px;
+}
+
+.slider-handle {
+    width: 40px;
+    height: 40px;
+    background: var(--black);
+    border: 2px solid var(--neon-red);
+    position: absolute;
+    top: -18px;
+    left: 0;
+    cursor: grab;
+    z-index: 20;
+}
+
+.slider-handle:active { cursor: grabbing; background: var(--neon-red); }
+
+/* Stopwatch & Folder */
+#scroll-timer {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    font-size: 2rem;
+    color: var(--neon-red);
+    opacity: 0;
+    z-index: 100;
+}
+
+.timer-active { opacity: 1 !important; }
+
+#archive-folder {
+    position: fixed;
+    bottom: 40px;
+    right: 40px;
+    width: 80px;
+    cursor: pointer;
+    text-align: center;
+    z-index: 2000;
+}
+
+#archive-folder img { width: 100%; filter: grayscale(1); }
+.label { font-size: 10px; font-weight: bold; letter-spacing: 2px; }
+
+/* Data Spike Lines */
+.data-trace {
+    position: fixed;
+    pointer-events: none;
+    z-index: 1999;
+}
+
+/* Assumptions On Top of Folder*/
+#assumption-text {
+    position: absolute;
+    bottom: 100px;
+    right: 0;
+    width: 250px;
+    color: var(--neon-red);
+    font-size: 12px;
+    font-weight: bold;
+    text-align: right;
+    opacity: 0;
+    transition: opacity 0.2s;
+}
+
+/* Visuals for Timer/Typing */
+.timer { font-size: 5rem; font-weight: 900; color: var(--neon-red); margin-bottom: 20px; }
+.typing-target { color: var(--neon-red); background: #f4f4f4; padding: 20px; margin-bottom: 20px; font-size: 0.9rem; }
+.system-input { width: 500px; height: 100px; border: 3px solid var(--black); text-transform: uppercase; padding: 10px; font-family: inherit; }
+
+
+.noise-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: url('https://grainy-gradients.vercel.app/noise.svg'); opacity: 0.04; pointer-events: none; z-index: 999; }
+
+/* Pulsing Clock Rhythm */
+.pulse-clock {
+    position: fixed;
+    width: 300px; height: 300px;
+    border: 2px solid var(--neon-red);
+    border-radius: 50%;
+    opacity: 0.05;
+    pointer-events: none;
+    animation: clock-heartbeat 2s infinite ease-in-out;
+}
+@keyframes clock-heartbeat { 0% { transform: scale(0.8); opacity: 0.05; } 50% { transform: scale(1.2); opacity: 0.02; } 100% { transform: scale(0.8); opacity: 0.05; } }
+
+/* Ripple Effect */
+.ripple {
+    position: absolute;
+    border: 2px solid var(--neon-red);
+    border-radius: 50%;
+    transform: scale(0);
+    animation: ripple-out 0.7s ease-out forwards;
+    pointer-events: none;
+    z-index: 1000;
+}
+@keyframes ripple-out { to { transform: scale(5); opacity: 0; } }
+
+/* Pan-Zoom Animation */
+.pan-zoom { animation: pan-zoom-anim 1s cubic-bezier(0.19, 1, 0.22, 1); }
+@keyframes pan-zoom-anim { 0% { transform: scale(0.9) translateZ(-100px); opacity: 0; } 100% { transform: scale(1) translateZ(0); opacity: 1; } }
+
+/* Glitch Memory Fragments */
+.glitch-flash { animation: glitch-flash-anim 0.4s steps(2) infinite; }
+@keyframes glitch-flash-anim { 
+    0% { background: var(--neon-red); filter: invert(1); } 
+    50% { clip-path: polygon(0 10%, 100% 10%, 100% 20%, 0 20%); }
+    100% { background: transparent; }
+}
+
+/* Cookie Popup Styling */
+.cookie-popup {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 250px; /* small to be mid screen */
+    background: white;
+    border: 2px solid var(--black);
+    padding: 15px; /* tighter padding for a small scale */
+    z-index: 5000;
+    box-shadow: 6px 6px 0px var(--black);
+    text-align: left;
+    display: flex;
+    flex-direction: column;
+}
+
+.cookie-header {
+    font-weight: 900;
+    font-size: 0.9rem; /* smaller font for a smaller box */
+    margin-bottom: 8px;
+    letter-spacing: 0.5px;
+    border-bottom: 1px solid var(--black);
+    padding-bottom: 3px;
+}
+
+.cookie-desc {
+    text-transform: none; 
+    font-size: 0.75rem;
+    line-height: 1.3;
+    margin-bottom: 15px;
+    color: #111;
+}
+.cookie-btn {
+    padding: 8px;
+    font-size: 0.7rem;
+    font-weight: 700;
+    cursor: pointer;
+    background: none;
+    border: 1px solid var(--black);
+    text-transform: uppercase;
+    transition: 0.1s;
+    text-align: center;
+}
+
+.cookie-btn:hover {
+    background: var(--black);
+    color: white;
+}
+
+.cookie-btn-decline {
+    border-color: #bbbbbb;
+    color: #999999;
+}
+
+/* General Clinical Button Style Used for Most Instructions (Black & White) */
+.btn-clinical {
+    color: var(--black);
+    border-color: var(--black);
+}
+
+.btn-clinical:hover {
+    background: var(--black);
+    color: var(--pure-white);
+}
+
+/* Image Selection Styling */
+.image-choice-container {
+    display: flex;
+    gap: 40px;
+}
+
+.choice-img {
+    width: 250px;
+    height: 350px;
+    object-fit: cover;
+    border: 4px solid var(--black);
+    cursor: pointer;
+    transition: transform 0.3s ease;
+}
+
+.choice-img:hover {
+    border-color: var(--neon-red);
+    transform: scale(1.02);
+}
+
+/* Intense Glitch Effect */
+.intense-glitch {
+    animation: intense-shake 0.1s infinite, color-shift 0.1s infinite;
+    filter: contrast(500%) invert(1);
+}
+
+@keyframes intense-shake {
+    0% { transform: translate(0, 0); }
+    25% { transform: translate(-10px, 10px); }
+    50% { transform: translate(10px, -10px); }
+    75% { transform: translate(-10px, -10px); }
+    100% { transform: translate(10px, 10px); }
+}
+@keyframes color-shift {
+    0% { background-color: #FFFFFF; }
+    50% { background-color: #E6E6E6; }
+    100% { background-color: #CCCCCC; }
+}
+
+.cpu-prompt {
+    font-family: 'Courier New', monospace;
+    font-size: 20px;
+    letter-spacing: 2px;
+    color: hsl(0, 0%, 0%);
+    margin-top: 70px;
+    opacity: 0.9;
+    text-transform: uppercase;
+    font-weight: 600;
+}
+
+.cursor {
+    animation: blink 1s infinite;
+    /*move it to the left*/
+    margin-left: -70px;
+
+}
+
+@keyframes blink { 50% { opacity: 0; } }
+
+/* PROFILE HTML has its own page */

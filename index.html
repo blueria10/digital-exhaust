@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DIGITAL EXHAUST</title>
+    <link rel="stylesheet" href="src/style.css">
+    <!-- Favicon link setup-->
+	<link rel="icon" type="image/png" href="src\images\folder3.ico">
+</head>
+<body onclick="createRipple(event)">
+    <div class="noise-overlay"></div>
+    <div class="pulse-clock"></div> <div id="scroll-timer">0.00s</div>
+
+    <main id="app">
+        <div class="cpu-container" id="entry-point">
+            <img class="cpu-image" src="https://images.vexels.com/media/users/3/330281/isolated/preview/d75a15736ea9b71f8a24d9334efcc3ce-cpu-icon.png" alt="CPU">
+            <div class="cpu-prompt">
+                <span class="cursor">_</span> INITIALIZE_EXTRACTION
+            </div>
+        </div>
+    </main>
+
+    <div id="archive-folder" style="display: none;">
+        <div id="assumption-text"></div>
+        <img src="https://www.iconpacks.net/icons/2/free-folder-icon-1484-thumb.png" alt="Folder">
+        <span class="label">ARCHIVE</span>
+    </div>
+
+    <script src="src/script.js"></script>
+</body>
+</html>
